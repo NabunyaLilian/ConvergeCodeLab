@@ -1,6 +1,5 @@
 package com.example.thecodelab.presenter;
 
-
 import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.model.GithubUsersResponse;
 import com.example.thecodelab.service.GithubService;
@@ -37,6 +36,7 @@ public class GithubPresenter {
                     @Override
                     public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                         GithubUsersResponse githubUsersResponse = response.body();
+
 
 
                         if (githubUsersResponse != null && githubUsersResponse.getUsers() !=null){

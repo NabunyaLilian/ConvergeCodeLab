@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relativeLayout"
+<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="2dp"
+    android:layout_margin="12dp"
+    app:cardPreventCornerOverlap="true"
+    android:id="@+id/parent_id"
+    app:cardCornerRadius="4dp">
+    
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FAF9F9"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/imageView"
-        android:src="@mipmap/ic_launcher"/>
+        <ImageView
+            android:contentDescription="@string/github_user_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"
+            android:padding="10dp"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toEndOf="@id/imageView"
-        android:textColor="#000"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="30dp"
-        android:textSize="16sp"
-        android:layout_toRightOf="@id/imageView"
-        android:layout_marginLeft="30dp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#000"
+            android:layout_marginStart="30dp"
+            android:textSize="16sp"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
+</android.support.design.card.MaterialCardView>
 
-</RelativeLayout>

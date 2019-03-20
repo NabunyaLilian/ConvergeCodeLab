@@ -35,9 +35,10 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         if (savedInstanceState != null){
             user = savedInstanceState.getParcelable("user");
             userProfile(user);
-        } else{
+        } else {
             loadData();
         }
+
     }
 
     private void startSharingIntent(String username, String profileURL) {
@@ -64,10 +65,12 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         githubPresenter.fetchSingleUser(imageName, this);
     }
 
-    private void getIncomingIntent(){
-        if(getIntent().hasExtra("image_name")){
+    private void getIncomingIntent() {
+        if (getIntent().hasExtra("image_name")) {
+            userName = getIntent().getStringExtra("image_name");
             imageName = getIntent().getStringExtra("image_name");
             setImage(imageName);
+
         }
     }
 
@@ -95,10 +98,9 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
 
         TextView org = findViewById(R.id.orgValue);
         String company = githubUser.getOrganisation();
-        if (company != null){
+        if (company != null) {
             org.setText(githubUser.getOrganisation());
-        }
-        else {
+        } else {
             org.setText(getResources().getString(R.string.none));
         }
         TextView follower = findViewById(R.id.follower);
@@ -110,6 +112,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
 
         startSharingIntent(userName, profileURL);
         setShareIntent(sharingIntent);
+
     }
 
     @Override
@@ -123,5 +126,4 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         super.onRestoreInstanceState(savedInstanceState);
         user = savedInstanceState.getParcelable("user");
     }
-
 }
