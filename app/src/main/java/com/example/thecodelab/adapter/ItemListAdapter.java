@@ -1,4 +1,4 @@
-package com.example.thecodelab;
+package com.example.thecodelab.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.thecodelab.R;
+import com.example.thecodelab.view.DetailActivity;
 
 import java.util.ArrayList;
 

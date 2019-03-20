@@ -1,9 +1,12 @@
-package com.example.thecodelab;
+package com.example.thecodelab.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.thecodelab.adapter.ItemListAdapter;
+import com.example.thecodelab.R;
 
 import java.util.ArrayList;
 
