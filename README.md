@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/NabunyaLilian/ConvergeCodeLab.svg?style=svg)](https://circleci.com/gh/NabunyaLilian/ConvergeCodeLab)   [![Maintainability](https://api.codeclimate.com/v1/badges/bfb511ffb9102ad9fbf5/maintainability)](https://codeclimate.com/github/NabunyaLilian/ConvergeCodeLab/maintainability)  [![Test Coverage](https://api.codeclimate.com/v1/badges/bfb511ffb9102ad9fbf5/test_coverage)](https://codeclimate.com/github/NabunyaLilian/ConvergeCodeLab/test_coverage)
+
 # Android Level Up Project
 - This project is about building an Android app that retrieves a list of java developers in Nairobi using the GitHub API.
 
