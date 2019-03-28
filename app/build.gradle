@@ -1,7 +1,20 @@
-apply plugin: 'com.android.application'
 apply from: "$project.rootDir/tools/findbugs.gradle"
 apply from: "$project.rootDir/tools/pmd.gradle"
 apply from: "$project.rootDir/tools/checkstyle.gradle"
+
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 28
