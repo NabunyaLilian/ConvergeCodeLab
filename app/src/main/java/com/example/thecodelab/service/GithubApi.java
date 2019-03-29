@@ -15,4 +15,5 @@ public interface GithubApi {
 
     @GET("users/{username}")
     Call<GithubUser> getUser(@Path("username") String username);
+
 }
