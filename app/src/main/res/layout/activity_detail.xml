@@ -56,7 +56,9 @@
             android:textSize="20sp"
             android:layout_toRightOf="@+id/followerText"
             android:textColor="#000"
-            android:layout_toEndOf="@+id/followerText" />
+            android:layout_toEndOf="@+id/followerText"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp"/>
 
         <TextView
             android:layout_width="wrap_content"

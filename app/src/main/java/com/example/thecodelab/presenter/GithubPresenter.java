@@ -5,6 +5,7 @@ import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.model.GithubUsersResponse;
 import com.example.thecodelab.service.GithubService;
 import com.example.thecodelab.view.GithubUsersView;
+import com.example.thecodelab.view.SingleUserView;
 
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class GithubPresenter {
         } catch (InterruptedException e) { }
     }
 
-
     public void fetchUsers(final GithubUsersView githubUsersView){
         githubService
                 .getRetrofitInstance()
@@ -38,6 +38,7 @@ public class GithubPresenter {
                     public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                         GithubUsersResponse githubUsersResponse = response.body();
 
+
                         if (githubUsersResponse != null && githubUsersResponse.getUsers() !=null){
                             List<GithubUser> githubUser = githubUsersResponse.getUsers();
                             githubUsersView.readyUsers(githubUser);
@@ -46,6 +47,25 @@ public class GithubPresenter {
 
                     @Override
                     public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
+
+                        throwException();
+                    }
+                });
+    }
+
+    public void fetchSingleUser(String username, final SingleUserView singleUserView){
+        githubService
+                .getRetrofitInstance()
+                .getUser(username)
+                .enqueue(new Callback<GithubUser>() {
+                    @Override
+                    public void onResponse(Call<GithubUser> call, Response<GithubUser> response) {
+                        singleUserView.userProfile(response.body());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<GithubUser> call, Throwable t) {
 
                         throwException();
                     }
