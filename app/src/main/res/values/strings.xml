@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">CodeLab</string>
+    <string name="username">Username</string>
+    <string name="todo">TODO</string>
+    <string name="_7500">7500</string>
+    <string name="followers">Followers</string>
+    <string name="_5000">5000</string>
+    <string name="following">Following</string>
+    <string name="name">Username</string>
+    <string name="organisation">Organisation</string>
+    <string name="andela">Andela</string>
+    <string name="bio">Bio</string>
+    <string name="i_love_music_photography_travel_and_dance">I love music, photography, travel and dance</string>
+    <string name="public_repos">Public Repos</string>
+    <string name="_70">70</string>
 </resources>
