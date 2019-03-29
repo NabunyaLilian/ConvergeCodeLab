@@ -1,5 +1,6 @@
 package com.example.thecodelab.presenter;
 
+
 import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.model.GithubUsersResponse;
 import com.example.thecodelab.service.GithubService;
@@ -14,7 +15,6 @@ import retrofit2.Response;
 
 public class GithubPresenter {
     GithubService githubService;
-
 
     public GithubPresenter() {
         if(this.githubService == null){
