@@ -8,12 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import com.example.thecodelab.adapter.ItemListAdapter;
 import com.example.thecodelab.R;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<String> mUsername = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    List<String> mUsername;
+    List<String> mImageUrls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

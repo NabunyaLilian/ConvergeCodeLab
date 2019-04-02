@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GithubUsersResponse {
     @SerializedName("items")
-    private List<GithubUser> users;
+    List<GithubUser> users;
 
     public GithubUsersResponse(List<GithubUser> users) {
         this.users = users;
