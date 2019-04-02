@@ -36,4 +36,3 @@
             android:layout_marginLeft="30dp" />
     </LinearLayout>
 </android.support.design.card.MaterialCardView>
-

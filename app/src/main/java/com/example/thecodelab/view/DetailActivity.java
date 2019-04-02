@@ -49,6 +49,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
                 "awesome developer @" + username + ", "+ profileURL +" .");
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -65,9 +66,8 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         githubPresenter.fetchSingleUser(imageName, this);
     }
 
-    private void getIncomingIntent() {
-        if (getIntent().hasExtra("image_name")) {
-            userName = getIntent().getStringExtra("image_name");
+    private void getIncomingIntent(){
+        if(getIntent().hasExtra("image_name")){
             imageName = getIntent().getStringExtra("image_name");
             setImage(imageName);
 
