@@ -32,7 +32,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         setContentView(R.layout.activity_detail);
         getIncomingIntent();
         startSharingIntent("lillian", "profile url");
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             user = savedInstanceState.getParcelable("user");
             userProfile(user);
         } else {
