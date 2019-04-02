@@ -14,17 +14,17 @@ import com.bumptech.glide.Glide;
 import com.example.thecodelab.R;
 import com.example.thecodelab.view.DetailActivity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHolder>{
-    private ArrayList<String> mTextView = new ArrayList<>();
-    private ArrayList<String> mImageView = new ArrayList<>();
-    private Context mContext;
+    List<String> mTextView;
+    List<String> mImageView;
+    Context mContext;
 
-    public ItemListAdapter(ArrayList<String> mTextView, ArrayList<String> mImageView, Context mContext) {
+    public ItemListAdapter(List<String> mTextView, List<String> mImageView, Context mContext) {
         this.mTextView = mTextView;
         this.mImageView = mImageView;
         this.mContext = mContext;
@@ -34,25 +34,24 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem) ;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Glide.with(mContext)
                 .asBitmap()
                 .load(mImageView.get(position))
                 .into(holder.imageView);
 
-        holder.textView.setText(mTextView.get(position));
+        holder.textView.setText(mTextView.get(holder.getAdapterPosition()));
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, mTextView.get(position),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mTextView.get(holder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra("image_url", mImageView.get(position));
-                intent.putExtra("image_name", mTextView.get(position));
+                intent.putExtra("image_url", mImageView.get(holder.getAdapterPosition()));
+                intent.putExtra("image_name", mTextView.get(holder.getAdapterPosition()));
                 mContext.startActivity(intent);
             }
         });

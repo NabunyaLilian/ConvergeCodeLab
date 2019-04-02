@@ -4,28 +4,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class GithubUser {
     @SerializedName("login")
-    private String username;
+    String username;
 
     @SerializedName("company")
-    private String organisation;
+    String organisation;
 
     @SerializedName("avatar_url")
-    private String avatar;
+    String avatar;
 
     @SerializedName("bio")
-    private String bio;
+    String bio;
 
     @SerializedName("url")
-    private String githubUrl;
+    String githubUrl;
 
     @SerializedName("followers")
-    private int followers;
+    int followers;
 
     @SerializedName("following")
-    private int following;
+    int following;
 
     @SerializedName("public_repos")
-    private int publicRepos;
+    int publicRepos;
 
     public GithubUser(String username, String organisation, String avatar,
                       String bio, String githubUrl, int followers,
