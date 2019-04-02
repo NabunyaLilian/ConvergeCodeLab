@@ -17,7 +17,6 @@ import retrofit2.Response;
 public class GithubPresenter {
     GithubService githubService;
 
-
     public GithubPresenter() {
         if(this.githubService == null){
             this.githubService = new GithubService();
@@ -48,11 +47,11 @@ public class GithubPresenter {
 
                     @Override
                     public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
-
                         throwException();
                     }
                 });
     }
+
 
     public void fetchSingleUser(String username, final SingleUserView singleUserView){
         githubService

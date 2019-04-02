@@ -45,6 +45,7 @@ captures/
 .idea/caches
 .idea/misc.xml
 .idea/modules.xml
+.idea/checkstyle-idea.xml
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
@@ -74,6 +75,7 @@ app/.project
 app/.settings/
 app/.classpath
 .settings/
+
 
 
 
