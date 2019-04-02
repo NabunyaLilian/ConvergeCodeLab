@@ -18,4 +18,5 @@
     <string name="refresh_menu" />
     <string name="github_user_image">github user image</string>
     <string name="share">Share</string>
+    <string name="notAssigned">n/a</string>
 </resources>

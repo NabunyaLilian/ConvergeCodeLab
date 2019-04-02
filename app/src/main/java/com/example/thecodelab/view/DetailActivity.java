@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 
+
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +28,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     String userName, profileURL;
     Intent sharingIntent;
     private ShareActionProvider shareActionProvider;
+    CountingIdlingResource mcountingIdlingResource = new CountingIdlingResource("DETAIL_LOADER");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +50,8 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Share");
         sharingIntent.putExtra(Intent.EXTRA_TEXT, "Check out this " +
-                "awesome developer @" + username + ", "+ profileURL +" .");
+                "awesome developer @" + username + ", " + profileURL + " .");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,12 +65,13 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     }
 
     private void loadData() {
+        mcountingIdlingResource.increment();
         GithubPresenter githubPresenter = new GithubPresenter();
         githubPresenter.fetchSingleUser(imageName, this);
     }
 
-    private void getIncomingIntent(){
-        if(getIntent().hasExtra("image_name")){
+    private void getIncomingIntent() {
+        if (getIntent().hasExtra("image_name")) {
             imageName = getIntent().getStringExtra("image_name");
             setImage(imageName);
 
@@ -89,29 +93,47 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     @Override
     public void userProfile(GithubUser githubUser) {
         user = githubUser;
-        userName = githubUser.getUsername();
-        profileURL = githubUser.getGithubUrl();
-        TextView bio = findViewById(R.id.bioValue);
-        bio.setText(githubUser.getBio());
         ImageView image = findViewById(R.id.image);
-        Picasso.get().load(githubUser.getAvatar()).into(image);
 
-        TextView org = findViewById(R.id.orgValue);
-        String company = githubUser.getOrganisation();
-        if (company != null) {
-            org.setText(githubUser.getOrganisation());
+        if (githubUser != null) {
+            profileURL = githubUser.getGithubUrl();
+            TextView bio = findViewById(R.id.bioValue);
+            bio.setText(githubUser.getBio());
+
+            Picasso.get().load(githubUser.getAvatar()).into(image);
+            TextView org = findViewById(R.id.orgValue);
+            String company = githubUser.getOrganisation();
+            if (company != null) {
+                org.setText(githubUser.getOrganisation());
+            } else {
+                org.setText(getResources().getString(R.string.none));
+            }
+            TextView follower = findViewById(R.id.follower);
+            follower.setText(String.valueOf(githubUser.getFollowers()));
+            TextView following = findViewById(R.id.following);
+            following.setText(String.valueOf(githubUser.getFollowing()));
+            TextView numberOfRepos = findViewById(R.id.numberOfRepos);
+            numberOfRepos.setText(String.valueOf(githubUser.getPublicRepos()));
+
         } else {
-            org.setText(getResources().getString(R.string.none));
-        }
-        TextView follower = findViewById(R.id.follower);
-        follower.setText(String.valueOf(githubUser.getFollowers()));
-        TextView following = findViewById(R.id.following);
-        following.setText(String.valueOf(githubUser.getFollowing()));
-        TextView numberOfRepos = findViewById(R.id.numberOfRepos);
-        numberOfRepos.setText(String.valueOf(githubUser.getPublicRepos()));
+            Picasso.get().load("https://avatars1.githubusercontent.com/u/8445?v=4").into(image);
+            profileURL = getString(R.string.notAssigned);
+            TextView bio = findViewById(R.id.bioValue);
+            bio.setText(getString(R.string.notAssigned));
 
-        startSharingIntent(userName, profileURL);
+            TextView org = findViewById(R.id.orgValue);
+            org.setText(getString(R.string.notAssigned));
+            TextView follower = findViewById(R.id.follower);
+            follower.setText(getString(R.string.notAssigned));
+            TextView following = findViewById(R.id.following);
+            following.setText(getString(R.string.notAssigned));
+            TextView numberOfRepos = findViewById(R.id.numberOfRepos);
+            numberOfRepos.setText(getString(R.string.notAssigned));
+
+        }
+        startSharingIntent(imageName, profileURL);
         setShareIntent(sharingIntent);
+        mcountingIdlingResource.decrement();
 
     }
 
@@ -125,5 +147,10 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         user = savedInstanceState.getParcelable("user");
+    }
+
+    @VisibleForTesting
+    public CountingIdlingResource getIdlingResourceInTest() {
+        return mcountingIdlingResource;
     }
 }
