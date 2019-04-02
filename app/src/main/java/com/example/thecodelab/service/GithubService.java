@@ -5,10 +5,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GithubService {
 
-    private static Retrofit retrofit;
+    private static Retrofit retrofit = null;
     private static  final String BASE_URL = "https://api.github.com";
 
-    public static Retrofit getRetrofitInstance() {
+    public GithubApi getRetrofitInstance() {
         if (retrofit == null) {
             retrofit = new Retrofit
                     .Builder()
@@ -17,7 +17,7 @@ public class GithubService {
                     .build();
         }
 
-        return retrofit;
+        return retrofit.create(GithubApi.class);
     }
 
 }
