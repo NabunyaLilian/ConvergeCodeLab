@@ -80,7 +80,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         }
     }
 
-    private void setImage(String imageName){
+    private void setImage(String imageName) {
         TextView name = findViewById(R.id.image_description);
         name.setText(imageName);
     }
