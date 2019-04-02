@@ -66,7 +66,6 @@ public class GithubPresenter {
 
                     @Override
                     public void onFailure(Call<GithubUser> call, Throwable t) {
-
                         throwException();
                     }
                 });

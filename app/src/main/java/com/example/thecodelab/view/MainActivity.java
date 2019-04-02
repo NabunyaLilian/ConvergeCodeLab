@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView {
     }
 
     private void initRecyclerView(List<GithubUser> githubUserList){
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         GithubAdapter adapter = new GithubAdapter(githubUserList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
