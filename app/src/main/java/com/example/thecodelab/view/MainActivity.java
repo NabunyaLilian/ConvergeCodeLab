@@ -1,11 +1,11 @@
 package com.example.thecodelab.view;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.Parcelable;
 
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
 
 import android.support.annotation.VisibleForTesting;
@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class MainActivity extends AppCompatActivity implements GithubUsersView, NetworkListener {
     List< GithubUser> githubUserList;
     Parcelable state;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     static final String TAG = "MainActivity";
-    private final NetworkUtility networkUtility = new NetworkUtility(this);
+    final NetworkUtility networkUtility = new NetworkUtility(this);
     IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     private Snackbar snackbar;
     CountingIdlingResource countingIdlingResource = new CountingIdlingResource("DATA_LOADER");
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
                     Thread.sleep(1000);
                 } catch (Exception e) {
                     Log.d(TAG, "run: something went wrong");
+
                 }
                 progressDialog.dismiss();
             }
