@@ -5,6 +5,7 @@ import com.example.thecodelab.model.GithubUsersResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface GithubApi {
 
@@ -12,5 +13,5 @@ public interface GithubApi {
     Call<GithubUsersResponse> getUsers();
 
     @GET("users/{username}")
-    Call<GithubUser> getUser();
+    Call<GithubUser> getUser(@Path("username") String username);
 }

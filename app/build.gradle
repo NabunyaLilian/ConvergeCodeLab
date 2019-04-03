@@ -1,8 +1,6 @@
-apply from: "$project.rootDir/tools/findbugs.gradle"
-apply from: "$project.rootDir/tools/pmd.gradle"
-apply from: "$project.rootDir/tools/checkstyle.gradle"
-
-
+apply plugin: 'com.android.application'
+apply from: "$project.rootDir/tools/qualityChecks.gradle"
+apply from: "$project.rootDir/gradle/git-hooks.gradle"
 
 buildscript {
     repositories {
@@ -26,6 +24,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -43,7 +42,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

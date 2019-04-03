@@ -15,10 +15,11 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         getIncomingIntent();
+
     }
 
     private void getIncomingIntent(){
-        if(getIntent().hasExtra("image_url") && getIntent().hasExtra("image_name")){
+        if(getIntent().hasExtra("image_name") && getIntent().hasExtra("image_name")){
             String imageUrl = getIntent().getStringExtra("image_url");
             String imageName = getIntent().getStringExtra("image_name");
 
@@ -26,7 +27,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void setImage(String imageUrl, String imageName){
+    private void setImage(String imageName, String imageUrl){
         TextView name = findViewById(R.id.image_description);
         name.setText(imageName);
         ImageView image = findViewById(R.id.image);
@@ -34,5 +35,7 @@ public class DetailActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(imageUrl)
                 .into(image);
+
     }
+
 }

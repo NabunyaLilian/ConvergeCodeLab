@@ -1,6 +1,5 @@
 package com.example.thecodelab;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,48 +9,44 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.thecodelab.model.GithubUser;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHolder>{
-    private ArrayList<String> mTextView = new ArrayList<>();
-    private ArrayList<String> mImageView = new ArrayList<>();
-    private Context mContext;
+    List<GithubUser> githubUserArray;
 
-    public ItemListAdapter(ArrayList<String> mTextView, ArrayList<String> mImageView, Context mContext) {
-        this.mTextView = mTextView;
-        this.mImageView = mImageView;
-        this.mContext = mContext;
+    private static final String TAG = "ItemListAdapter";
+    public ItemListAdapter(List<GithubUser> githubUserArray) {
+        this.githubUserArray = githubUserArray;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem) ;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mImageView.get(position))
-                .into(holder.imageView);
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final GithubUser githubUser = githubUserArray.get(holder.getAdapterPosition());
 
-        holder.textView.setText(mTextView.get(position));
+        Picasso.get().load(githubUser.getAvatar()).into(holder.imageView);
+
+        holder.textView.setText(githubUser.getUsername());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, mTextView.get(position),Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra("image_url", mImageView.get(position));
-                intent.putExtra("image_name", mTextView.get(position));
-                mContext.startActivity(intent);
+            Toast.makeText(v.getContext(), githubUser.getUsername(),Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            intent.putExtra("image_name", githubUser.getUsername());
+            v.getContext().startActivity(intent);
             }
         });
     }
@@ -59,7 +54,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mTextView.size();
+        return githubUserArray.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
