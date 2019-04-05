@@ -66,6 +66,8 @@ fastlane/test_output
 fastlane/readme.md
 
 .DS_Store
+.project
+app/.project
 
 
 
