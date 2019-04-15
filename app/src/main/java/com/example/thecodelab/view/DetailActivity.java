@@ -1,4 +1,4 @@
-package com.example.thecodelab;
+package com.example.thecodelab.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.thecodelab.R;
 
 public class DetailActivity extends AppCompatActivity {
     @Override
