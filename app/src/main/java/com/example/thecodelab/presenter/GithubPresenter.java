@@ -12,13 +12,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GithubPresenter {
-    private GithubUsersView githubUsersView;
-    private GithubService githubService;
+    GithubUsersView githubUsersView;
+    GithubService githubService;
 
 
     public GithubPresenter(GithubUsersView githubUsersView) {
         this.githubUsersView = githubUsersView;
-
         if(this.githubService == null){
             this.githubService = new GithubService();
         }
@@ -29,7 +28,6 @@ public class GithubPresenter {
             throw new InterruptedException("Something went wrong!");
         } catch (InterruptedException e) { }
     }
-
     public void fetchUsers(){
         githubService
                 .getRetrofitInstance()
@@ -47,6 +45,7 @@ public class GithubPresenter {
 
                     @Override
                     public void onFailure(Call<GithubUsersResponse> call, Throwable t) {
+
                         throwException();
                     }
                 });

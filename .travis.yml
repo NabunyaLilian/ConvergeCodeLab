@@ -36,7 +36,7 @@ before_script:
 - adb shell input keyevent 82 &
 
 script:
-#- ./gradlew build check
+- ./gradlew build check
 - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
 - bash <(curl -s https://codecov.io/bash)
 
