@@ -10,7 +10,6 @@ import com.example.thecodelab.adapter.GithubAdapter;
 import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.presenter.GithubPresenter;
 
-
 import java.util.List;
 
 
