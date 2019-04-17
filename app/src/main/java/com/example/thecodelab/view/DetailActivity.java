@@ -16,7 +16,6 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     GithubUser user;
     String imageName;
 
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
@@ -70,7 +69,6 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         following.setText(String.valueOf(githubUser.getFollowing()));
         TextView numberOfRepos = findViewById(R.id.numberOfRepos);
         numberOfRepos.setText(String.valueOf(githubUser.getPublicRepos()));
-
     }
 
     @Override
