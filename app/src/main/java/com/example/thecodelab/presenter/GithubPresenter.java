@@ -17,6 +17,7 @@ import retrofit2.Response;
 public class GithubPresenter {
     GithubService githubService;
 
+
     public GithubPresenter() {
         if(this.githubService == null){
             this.githubService = new GithubService();

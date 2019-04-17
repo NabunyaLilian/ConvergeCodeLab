@@ -1,8 +1,11 @@
 package com.example.thecodelab.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GithubUser {
+public class GithubUser implements Parcelable {
     @SerializedName("login")
     String username;
 
@@ -40,6 +43,29 @@ public class GithubUser {
         this.publicRepos = publicRepos;
     }
 
+    public GithubUser(Parcel in) {
+        username = in.readString();
+        organisation = in.readString();
+        avatar = in.readString();
+        bio = in.readString();
+        githubUrl = in.readString();
+        followers = in.readInt();
+        following = in.readInt();
+        publicRepos = in.readInt();
+    }
+
+    public static final Creator<GithubUser> CREATOR = new Creator<GithubUser>() {
+        @Override
+        public GithubUser createFromParcel(Parcel in) {
+            return new GithubUser(in);
+        }
+
+        @Override
+        public GithubUser[] newArray(int size) {
+            return new GithubUser[size];
+        }
+    };
+
     public String getUsername() {
         return username;
     }
@@ -70,5 +96,22 @@ public class GithubUser {
 
     public int getPublicRepos() {
         return publicRepos;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(organisation);
+        dest.writeString(avatar);
+        dest.writeString(bio);
+        dest.writeString(githubUrl);
+        dest.writeInt(followers);
+        dest.writeInt(following);
+        dest.writeInt(publicRepos);
     }
 }

@@ -15,12 +15,23 @@ import com.squareup.picasso.Picasso;
 public class DetailActivity extends AppCompatActivity implements SingleUserView {
     GithubUser user;
     String imageName;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
         getIncomingIntent();
+
+        if (savedInstanceState != null){
+            user = savedInstanceState.getParcelable("user");
+            userProfile(user);
+        } else{
+            loadData();
+        }
+    }
+
+
+    private void loadData() {
         GithubPresenter githubPresenter = new GithubPresenter();
         githubPresenter.fetchSingleUser(imageName, this);
     }
@@ -61,4 +72,17 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         numberOfRepos.setText(String.valueOf(githubUser.getPublicRepos()));
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("user", user);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        user = savedInstanceState.getParcelable("user");
+    }
+
 }
