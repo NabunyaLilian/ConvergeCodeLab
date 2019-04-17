@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.thecodelab.view.DetailActivity;
 import com.example.thecodelab.R;
 import com.example.thecodelab.model.GithubUser;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
