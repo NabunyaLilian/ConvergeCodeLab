@@ -1,4 +1,5 @@
 package com.example.thecodelab.service;
+
 import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.model.GithubUsersResponse;
 

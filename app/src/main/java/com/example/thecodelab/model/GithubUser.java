@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class GithubUser implements Parcelable {
+
     @SerializedName("login")
     String username;
 
@@ -103,6 +104,7 @@ public class GithubUser implements Parcelable {
         return 0;
     }
 
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(username);
@@ -113,5 +115,7 @@ public class GithubUser implements Parcelable {
         dest.writeInt(followers);
         dest.writeInt(following);
         dest.writeInt(publicRepos);
+
     }
+
 }
