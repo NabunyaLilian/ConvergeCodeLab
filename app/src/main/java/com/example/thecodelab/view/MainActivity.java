@@ -3,6 +3,11 @@ package com.example.thecodelab.view;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.os.Parcelable;
+
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.support.design.widget.Snackbar;
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +19,9 @@ import com.example.thecodelab.R;
 import com.example.thecodelab.adapter.GithubAdapter;
 import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.presenter.GithubPresenter;
+import com.example.thecodelab.util.NetworkListener;
+import com.example.thecodelab.util.NetworkUtility;
+
 
 
 import java.util.ArrayList;
@@ -21,18 +29,22 @@ import java.util.List;
 
 
 
-public class MainActivity extends AppCompatActivity implements GithubUsersView {
+public class MainActivity extends AppCompatActivity implements GithubUsersView, NetworkListener {
     List< GithubUser> githubUserList;
     Parcelable state;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     ProgressDialog progressDialog;
     static final String TAG = "MainActivity";
+    private final NetworkUtility networkUtility = new NetworkUtility(this);
+    IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.registerReceiver(networkUtility, filter);
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swiperefresh);
         swipeToRefresh();
         recyclerView = findViewById(R.id.recyclerView);
@@ -122,4 +134,20 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView {
         }
     }
 
+    @Override
+    public void withInternet() {
+        if (snackbar != null) {
+            Snackbar.make(findViewById(R.id.indeterminateBar),
+                    "Connected to the internet", 3000).show();
+            swipeToRefresh();
+        }
+    }
+
+    @Override
+    public void withNoInternet() {
+        snackbar = Snackbar.make(findViewById(R.id.indeterminateBar),
+                "No internet connection", Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+
+    }
 }

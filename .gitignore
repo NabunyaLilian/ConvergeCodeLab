@@ -77,3 +77,8 @@ app/.classpath
 .settings/
 build-cache/
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> feat(network): add a network utiltiy class
