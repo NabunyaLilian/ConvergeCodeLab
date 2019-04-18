@@ -15,5 +15,7 @@
     <string name="_70">70</string>
     <string name="none">None</string>
     <string name="action" />
+    <string name="refresh_menu" />
     <string name="share">Share</string>
+    <string name="github_user_image">github user image</string>
 </resources>

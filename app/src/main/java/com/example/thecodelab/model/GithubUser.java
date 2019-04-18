@@ -19,7 +19,7 @@ public class GithubUser implements Parcelable {
     @SerializedName("bio")
     String bio;
 
-    @SerializedName("url")
+    @SerializedName("html_url")
     String githubUrl;
 
     @SerializedName("followers")
