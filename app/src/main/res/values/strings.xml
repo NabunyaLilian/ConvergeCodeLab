@@ -16,6 +16,6 @@
     <string name="none">None</string>
     <string name="action" />
     <string name="refresh_menu" />
-    <string name="share">Share</string>
     <string name="github_user_image">github user image</string>
+    <string name="share">Share</string>
 </resources>

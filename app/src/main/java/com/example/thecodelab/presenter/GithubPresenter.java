@@ -13,6 +13,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+
 public class GithubPresenter {
     GithubService githubService;
 
@@ -36,9 +37,6 @@ public class GithubPresenter {
                     @Override
                     public void onResponse(Call<GithubUsersResponse> call, Response<GithubUsersResponse> response) {
                         GithubUsersResponse githubUsersResponse = response.body();
-
-
-
                         if (githubUsersResponse != null && githubUsersResponse.getUsers() !=null){
                             List<GithubUser> githubUser = githubUsersResponse.getUsers();
                             githubUsersView.readyUsers(githubUser);
