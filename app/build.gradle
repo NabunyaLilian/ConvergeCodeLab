@@ -1,6 +1,8 @@
+
 apply plugin: 'com.android.application'
 apply from: "$project.rootDir/gradle/git-hooks.gradle"
 apply from: "$project.rootDir/tools/qualityChecks.gradle"
+apply from: "$project.rootDir/app/coverage.gradle"
 
 
 buildscript {
@@ -36,6 +38,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug{
+            testCoverageEnabled true
+        }
     }
 }
 
@@ -55,4 +60,9 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     implementation "com.android.support:exifinterface:$supportLibraryVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$testEspressoContribVersion"
+    implementation "com.android.support:exifinterface:$supportLibraryVersion"
+    androidTestImplementation "com.android.support.test:rules:$testRulesVersion"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
 }

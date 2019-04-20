@@ -8,6 +8,8 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
 
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,8 +23,6 @@ import com.example.thecodelab.model.GithubUser;
 import com.example.thecodelab.presenter.GithubPresenter;
 import com.example.thecodelab.util.NetworkListener;
 import com.example.thecodelab.util.NetworkUtility;
-
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +39,14 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
     private final NetworkUtility networkUtility = new NetworkUtility(this);
     IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
     private Snackbar snackbar;
+    CountingIdlingResource countingIdlingResource = new CountingIdlingResource("DATA_LOADER");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.registerReceiver(networkUtility, filter);
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swiperefresh);
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
         swipeToRefresh();
         recyclerView = findViewById(R.id.recyclerView);
         int orientation = this.getResources().getConfiguration().orientation;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
         new Thread(new Runnable() {
             public void run() {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (Exception e) {
                     Log.d(TAG, "run: something went wrong");
                 }
@@ -83,12 +84,14 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
     private void initRecyclerView(List<GithubUser> githubUserList){
         GithubAdapter adapter = new GithubAdapter(githubUserList);
         recyclerView.setAdapter(adapter);
+        countingIdlingResource.decrement();
     }
 
     public void gridSize(int size){
         recyclerView.setLayoutManager(new GridLayoutManager(this, size, GridLayoutManager.VERTICAL, false));
     }
     public void loadData(){
+        countingIdlingResource.increment();
         showProgressDialog();
         GithubPresenter githubPresenter = new GithubPresenter();
         githubPresenter.fetchUsers(this);
@@ -149,5 +152,10 @@ public class MainActivity extends AppCompatActivity implements GithubUsersView, 
                 "No internet connection", Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
 
+    }
+
+    @VisibleForTesting
+    public CountingIdlingResource getIdlingResourceInTest() {
+        return countingIdlingResource ;
     }
 }
