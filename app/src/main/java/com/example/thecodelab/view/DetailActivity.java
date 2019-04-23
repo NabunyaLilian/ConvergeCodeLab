@@ -3,12 +3,12 @@ package com.example.thecodelab.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 
 
-import android.support.annotation.VisibleForTesting;
-import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     String userName, profileURL;
     Intent sharingIntent;
     private ShareActionProvider shareActionProvider;
-    CountingIdlingResource mcountingIdlingResource = new CountingIdlingResource("DETAIL_LOADER");
+    CountingIdlingResource countingIdlingResource = new CountingIdlingResource("DETAIL_LOADER");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
     }
 
     private void loadData() {
-        mcountingIdlingResource.increment();
+        countingIdlingResource.increment();
         GithubPresenter githubPresenter = new GithubPresenter();
         githubPresenter.fetchSingleUser(imageName, this);
     }
@@ -88,7 +88,6 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         TextView name = findViewById(R.id.image_description);
         name.setText(imageName);
     }
-
 
     @Override
     public void userProfile(GithubUser githubUser) {
@@ -133,7 +132,7 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
         }
         startSharingIntent(imageName, profileURL);
         setShareIntent(sharingIntent);
-        mcountingIdlingResource.decrement();
+        countingIdlingResource.decrement();
 
     }
 
@@ -151,6 +150,6 @@ public class DetailActivity extends AppCompatActivity implements SingleUserView 
 
     @VisibleForTesting
     public CountingIdlingResource getIdlingResourceInTest() {
-        return mcountingIdlingResource;
+        return countingIdlingResource ;
     }
 }

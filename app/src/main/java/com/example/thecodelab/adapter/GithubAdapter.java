@@ -7,12 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.thecodelab.view.DetailActivity;
 import com.example.thecodelab.R;
 import com.example.thecodelab.model.GithubUser;
+import com.example.thecodelab.view.DetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

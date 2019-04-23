@@ -34,7 +34,7 @@ public class NetworkUtility extends BroadcastReceiver {
         for (int network : networks) {
             NetworkInfo networkInfo = conn.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.getState() == NetworkInfo.State.CONNECTED) {
-                Log.d(TAG, "isConnected:"+ network);
+                Log.d(TAG, "isConnected: " + network);
                 return true;
             }
         }
